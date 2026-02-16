@@ -1,0 +1,50 @@
+:root {
+  --bg-main: #10131a;
+  --bg-card: #181d26;
+  --text-main: #e9eef7;
+  --text-muted: #98a3b8;
+  --accent: #2f80ed;
+}
+
+body {
+  background: linear-gradient(180deg, #0d1117 0%, #10131a 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+.navbar,
+.card,
+.table {
+  background-color: var(--bg-card) !important;
+}
+
+.card {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.table,
+.table th,
+.table td {
+  color: var(--text-main);
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.chart-box {
+  width: 100%;
+  height: 340px;
+}
