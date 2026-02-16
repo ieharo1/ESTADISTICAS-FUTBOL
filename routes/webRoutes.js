@@ -6,9 +6,10 @@ const {
   renderLogin,
   renderRegister,
   renderProfile,
+  renderAdmin,
   logout
 } = require('../controllers/pageController');
-const { protect } = require('../middleware/auth');
+const { protect, admin } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -17,6 +18,7 @@ router.get('/auth/register', renderRegister);
 router.get('/auth/logout', logout);
 
 router.get('/perfil', protect, renderProfile);
+router.get('/admin', protect, admin, renderAdmin);
 router.get('/', protect, renderDashboard);
 router.get('/equipo', protect, renderTeamView);
 router.get('/comparativa', protect, renderCompareView);

@@ -52,6 +52,10 @@ const renderProfile = (req, res) => {
   res.render('perfil', { title: 'Mi Perfil', user: req.user });
 };
 
+const renderAdmin = (req, res) => {
+  res.render('admin', { title: 'Administración', user: req.user });
+};
+
 const logout = (req, res) => {
   res.clearCookie('token');
   res.redirect('/auth/login');
@@ -64,5 +68,6 @@ module.exports = {
   renderLogin,
   renderRegister,
   renderProfile,
+  renderAdmin,
   logout
 };
