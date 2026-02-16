@@ -1,0 +1,292 @@
+<%- include('partials/header', { title }) %>
+
+<div class="page-header">
+  <div class="d-flex flex-column flex-lg-row gap-3 align-items-lg-center justify-content-between">
+    <div>
+      <h1>Mi Perfil</h1>
+      <p class="mb-0">Administra tu información personal y preferencias</p>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-body text-center">
+        <div class="profile-avatar mb-3" id="profileAvatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <h4 id="profileName">Usuario</h4>
+        <p class="text-muted" id="profileEmail">email@ejemplo.com</p>
+        <button class="btn btn-primary" onclick="document.getElementById('avatarInput').click()">
+          <i class="fas fa-camera me-2"></i> Cambiar Foto
+        </button>
+        <input type="file" id="avatarInput" accept="image/*" style="display: none;" onchange="updateAvatar(event)">
+      </div>
+    </div>
+    
+    <div class="card mt-3">
+      <div class="card-header">
+        <h5 class="card-title mb-0"><i class="fas fa-shield-alt me-2"></i> Seguridad</h5>
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <strong>Contraseña</strong>
+            <p class="text-muted small mb-0">Última vez: hace 2 días</p>
+          </div>
+          <button class="btn btn-outline-light btn-sm" onclick="showChangePassword()">Cambiar</button>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <strong>Autenticación 2FA</strong>
+            <p class="text-muted small mb-0">Añade una capa extra de seguridad</p>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="twoFactor">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-lg-8">
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5 class="card-title mb-0"><i class="fas fa-user-edit me-2"></i> Información Personal</h5>
+      </div>
+      <div class="card-body">
+        <form id="profileForm" onsubmit="updateProfile(event)">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Nombre completo</label>
+              <input type="text" class="form-control" id="inputName" name="name" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" id="inputEmail" name="email" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Teléfono</label>
+              <input type="tel" class="form-control" id="inputPhone" name="phone" placeholder="+1 234 567 890">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">País</label>
+              <select class="form-select" id="inputCountry" name="country">
+                <option value="">Seleccionar...</option>
+                <option value="ES">España</option>
+                <option value="MX">México</option>
+                <option value="AR">Argentina</option>
+                <option value="CO">Colombia</option>
+                <option value="CL">Chile</option>
+                <option value="US">Estados Unidos</option>
+                <option value="UK">Reino Unido</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Biografía</label>
+              <textarea class="form-control" id="inputBio" name="bio" rows="3" placeholder="Cuéntanos sobre ti..."></textarea>
+            </div>
+          </div>
+          <div class="mt-4">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save me-2"></i> Guardar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5 class="card-title mb-0"><i class="fas fa-bell me-2"></i> Preferencias de Notificaciones</h5>
+      </div>
+      <div class="card-body">
+        <div class="form-check form-switch d-flex justify-content-between align-items-center py-2 border-bottom">
+          <div>
+            <strong>Notificaciones de partidos</strong>
+            <p class="text-muted small mb-0">Recibe alertas cuando juega tu equipo favorito</p>
+          </div>
+          <input class="form-check-input" type="checkbox" checked>
+        </div>
+        <div class="form-check form-switch d-flex justify-content-between align-items-center py-2 border-bottom">
+          <div>
+            <strong>Resultados en vivo</strong>
+            <p class="text-muted small mb-0">Notificaciones de goles y eventos importantes</p>
+          </div>
+          <input class="form-check-input" type="checkbox" checked>
+        </div>
+        <div class="form-check form-switch d-flex justify-content-between align-items-center py-2 border-bottom">
+          <div>
+            <strong>Newsletter semanal</strong>
+            <p class="text-muted small mb-0">Resumen de las mejores estadísticas de la semana</p>
+          </div>
+          <input class="form-check-input" type="checkbox">
+        </div>
+        <div class="form-check form-switch d-flex justify-content-between align-items-center py-2">
+          <div>
+            <strong>Actualizaciones de la app</strong>
+            <p class="text-muted small mb-0">Nuevas funciones y mejoras</p>
+          </div>
+          <input class="form-check-input" type="checkbox" checked>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title mb-0"><i class="fas fa-history me-2"></i> Actividad Reciente</h5>
+      </div>
+      <div class="card-body">
+        <div class="activity-item d-flex align-items-center py-3 border-bottom">
+          <div class="activity-icon bg-primary bg-opacity-10 text-primary">
+            <i class="fas fa-sign-in-alt"></i>
+          </div>
+          <div class="ms-3">
+            <strong>Último inicio de sesión</strong>
+            <p class="text-muted small mb-0">Hoy a las 14:32</p>
+          </div>
+        </div>
+        <div class="activity-item d-flex align-items-center py-3 border-bottom">
+          <div class="activity-icon bg-success bg-opacity-10 text-success">
+            <i class="fas fa-edit"></i>
+          </div>
+          <div class="ms-3">
+            <strong>Perfil actualizado</strong>
+            <p class="text-muted small mb-0">Ayer a las 10:15</p>
+          </div>
+        </div>
+        <div class="activity-item d-flex align-items-center py-3">
+          <div class="activity-icon bg-warning bg-opacity-10 text-warning">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="ms-3">
+            <strong>Estadísticas vistas</strong>
+            <p class="text-muted small mb-0">Premier League - 5 veces</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .profile-avatar:hover {
+    transform: scale(1.05);
+  }
+  .profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .activity-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+</style>
+
+<script>
+  let userData = {
+    name: 'Usuario',
+    email: '',
+    phone: '',
+    country: '',
+    bio: '',
+    avatar: ''
+  };
+  
+  function loadProfile() {
+    fetch('/api/user/profile')
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          userData = { ...userData, ...data };
+          renderProfile();
+        }
+      })
+      .catch(() => renderProfile());
+  }
+  
+  function renderProfile() {
+    document.getElementById('profileName').textContent = userData.name || 'Usuario';
+    document.getElementById('profileEmail').textContent = userData.email || 'Sin email';
+    document.getElementById('inputName').value = userData.name || '';
+    document.getElementById('inputEmail').value = userData.email || '';
+    document.getElementById('inputPhone').value = userData.phone || '';
+    document.getElementById('inputCountry').value = userData.country || '';
+    document.getElementById('inputBio').value = userData.bio || '';
+    
+    if (userData.avatar) {
+      document.getElementById('profileAvatar').innerHTML = `<img src="${userData.avatar}" alt="Avatar">`;
+      document.getElementById('userAvatar').innerHTML = `<img src="${userData.avatar}" alt="${userData.name}">`;
+    }
+  }
+  
+  function updateProfile(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    
+    fetch('/api/user/profile', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        userData = { ...userData, ...data.user };
+        renderProfile();
+        document.getElementById('userName').textContent = userData.name;
+        alert('Perfil actualizado correctamente');
+      }
+    });
+  }
+  
+  function updateAvatar(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      userData.avatar = e.target.result;
+      document.getElementById('profileAvatar').innerHTML = `<img src="${userData.avatar}" alt="Avatar">`;
+      document.getElementById('userAvatar').innerHTML = `<img src="${userData.avatar}" alt="${userData.name}">`;
+      
+      fetch('/api/user/profile', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ avatar: userData.avatar })
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+  
+  function showChangePassword() {
+    alert('Función de cambio de contraseña - Coming soon');
+  }
+  
+  loadProfile();
+</script>
+
+<%- include('partials/footer') %>

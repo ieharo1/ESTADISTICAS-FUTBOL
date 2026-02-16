@@ -2,9 +2,14 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 const { connectDB, seedIfEmpty } = require('./config/db');
 const webRoutes = require('./routes/webRoutes');
 const apiRoutes = require('./routes/apiRoutes');
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const { createAdmin } = require('./controllers/authController');
 
 const app = express();
 
@@ -14,10 +19,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', webRoutes);
 app.use('/api', apiRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/auth', authRoutes);
 
 app.use((req, res) => {
   res.status(404).render('error', {
@@ -47,6 +56,7 @@ const startServer = async () => {
   try {
     await connectDB();
     await seedIfEmpty();
+    await createAdmin();
     app.listen(PORT, () => {
       // eslint-disable-next-line no-console
       console.log(`Servidor escuchando en http://localhost:${PORT}`);
