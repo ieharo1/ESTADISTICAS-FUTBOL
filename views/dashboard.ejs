@@ -1,0 +1,60 @@
+<%- include('partials/header', { title }) %>
+
+<div class="d-flex flex-column flex-lg-row gap-3 align-items-lg-center justify-content-between mb-4">
+  <div>
+    <h1 class="h3 mb-1">Dashboard Principal</h1>
+    <p class="muted mb-0">Análisis completo por liga, tabla dinámica y métricas clave.</p>
+  </div>
+  <div class="d-flex gap-2">
+    <label class="form-label mb-0 mt-2">Liga</label>
+    <select id="leagueSelect" class="form-select">
+      <% leagues.forEach((league) => { %>
+      <option value="<%= league %>"><%= league %></option>
+      <% }) %>
+    </select>
+  </div>
+</div>
+
+<section class="row g-3 mb-3" id="overviewCards"></section>
+
+<section class="row g-3">
+  <div class="col-12 col-xl-8">
+    <div class="card p-3 h-100">
+      <h2 class="h5">Tabla de posiciones</h2>
+      <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle" id="standingsTable">
+          <thead>
+            <tr>
+              <th>#</th><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th><th>Pts</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-4">
+    <div class="card p-3 mb-3">
+      <h2 class="h6">Goles por equipo</h2>
+      <div id="goalsBar" class="chart-box"></div>
+    </div>
+  </div>
+</section>
+
+<section class="row g-3 mt-1">
+  <div class="col-12 col-lg-6">
+    <div class="card p-3">
+      <h2 class="h6">Radar ofensivo/defensivo</h2>
+      <div id="radarChart" class="chart-box"></div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-6">
+    <div class="card p-3">
+      <h2 class="h6">Distribución de puntos</h2>
+      <div id="pointsPie" class="chart-box"></div>
+    </div>
+  </div>
+</section>
+
+<script src="/js/dashboard.js"></script>
+<%- include('partials/footer') %>

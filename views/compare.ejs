@@ -1,0 +1,49 @@
+<%- include('partials/header', { title }) %>
+
+<div class="mb-4">
+  <h1 class="h3 mb-1">Vista Comparativa</h1>
+  <p class="muted mb-0">Compara 2 o más equipos y analiza diferencias entre ligas.</p>
+</div>
+
+<section class="card p-3 mb-3">
+  <div class="row g-3 align-items-end">
+    <div class="col-12 col-lg-8">
+      <label class="form-label">Selecciona equipos (Ctrl/Cmd + Click para múltiple)</label>
+      <select id="compareTeams" class="form-select" multiple size="8">
+        <% teams.forEach((team) => { %>
+        <option value="<%= team._id %>"><%= team.name %> - <%= team.league %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="col-12 col-lg-4 d-grid">
+      <button id="compareBtn" class="btn btn-primary">Comparar equipos</button>
+    </div>
+  </div>
+</section>
+
+<section class="row g-3">
+  <div class="col-12 col-lg-6">
+    <div class="card p-3">
+      <h2 class="h6">Comparativa avanzada (xG, ofensiva, defensiva)</h2>
+      <div id="advancedRadar" class="chart-box"></div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-6">
+    <div class="card p-3">
+      <h2 class="h6">Goles y eficiencia por equipo</h2>
+      <div id="compareBar" class="chart-box"></div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="card p-3">
+      <h2 class="h6">Comparación entre ligas (promedio de xG)</h2>
+      <div id="leagueLine" class="chart-box"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.__LEAGUES__ = <%- JSON.stringify(leagues) %>;
+</script>
+<script src="/js/compare.js"></script>
+<%- include('partials/footer') %>
