@@ -1,133 +1,154 @@
-# Estadísticas Fútbol Profesional - Europa
+# 🟢 TST SOLUTIONS - Estadísticas Fútbol Profesional
 
-Sistema web completo para análisis y visualización de estadísticas de fútbol profesional de ligas europeas, construido con **Node.js + Express + MongoDB + ECharts + Bootstrap 5** bajo arquitectura **MVC**.
+**Estadísticas Fútbol Profesional** es un sistema de análisis y visualización de estadísticas de fútbol europeo desarrollado por **TST Solutions** ("Te Solucionamos Todo").
 
-## Stack tecnológico
+---
 
-- Backend: Node.js + Express.js
-- Frontend: HTML5 + Bootstrap 5 + JavaScript vanilla
-- Gráficos: Apache ECharts
-- Base de datos: MongoDB + Mongoose
-- Motor de vistas: EJS
+## ⚽ ¿Qué es Estadísticas Fútbol?
 
-## Funcionalidades incluidas
+**Estadísticas Fútbol Profesional** es un sistema web completo para análisis y visualización de estadísticas de fútbol profesional de ligas europeas.
 
-### 1) Dashboard principal
-- Resumen por liga (goles totales, promedio por partido, mejor ataque, mejor defensa).
-- Tabla de posiciones dinámica con puntos y diferencia de goles.
+> *"Tecnología que funciona. Soluciones que escalan."*
+
+---
+
+## ✨ Características Principales
+
+### 📊 Dashboard Principal
+- Resumen por liga (goles totales, promedio por partido)
+- Mejor ataque y mejor defensa
+- Tabla de posiciones dinámica
 - Gráficos interactivos:
   - Barras (goles por equipo)
   - Radar (comparativa top 5)
   - Pie (distribución de puntos)
 
-### 2) Vista por equipo
-- Goles anotados/recibidos.
-- Posesión promedio.
-- Tiros al arco.
-- Efectividad.
-- xG simulado, índice defensivo, eficiencia ofensiva.
-- Racha reciente (W/D/L).
-- Evolución temporal de rendimiento (línea).
-- Heatmap de indicadores clave.
+### 🏆 Vista por Equipo
+- Goles anotados/recibidos
+- Posesión promedio
+- Tiros al arco
+- Efectividad
+- xG simulado
+- Índice defensivo y eficiencia ofensiva
+- Racha reciente (W/D/L)
+- Evolución temporal de rendimiento
 
-### 3) Vista comparativa
-- Comparación entre 2+ equipos seleccionados.
-- Radar avanzado (xG, ofensiva, defensiva, posesión, efectividad).
-- Barra + línea (goles y efectividad).
-- Comparación entre ligas con curva de xG simulado.
+### 🔍 Vista Comparativa
+- Comparación entre 2+ equipos
+- Radar avanzado
+- Comparación entre ligas
 
-## Estructura
+---
+
+## 🏗️ Estructura Técnica del Proyecto
 
 ```
-/config
-/controllers
-/models
-/routes
-/public
-/views
-scripts/
-server.js
-package.json
+ESTADISTICAS-FUTBOL/
+├── config/              # Configuración
+├── controllers/        # Controladores
+├── models/             # Modelos Mongoose
+├── routes/            # Rutas API
+├── public/            # Archivos estáticos
+├── views/             # Vistas EJS
+├── scripts/           # Scripts
+├── server.js          # Servidor
+└── package.json       # Dependencias
 ```
 
-## Requisitos
+---
 
-- Node.js 18+
-- MongoDB local o remoto
+## 🛠️ Tecnologías Utilizadas
 
-## Instalación
+### Backend
+- **Node.js** + Express.js
+- **MongoDB** + Mongoose
+- **EJS** (motor de vistas)
 
-1. Clonar o abrir el proyecto.
-2. Instalar dependencias:
-   ```bash
-   npm install
-   ```
-3. Crear archivo `.env` a partir de `.env.example`:
-   ```bash
-   cp .env.example .env
-   ```
-4. Ajustar `MONGODB_URI` según tu entorno.
+### Frontend
+- **HTML5**
+- **Bootstrap 5**
+- **JavaScript** Vanilla
+- **Apache ECharts** (gráficos)
 
-## Ejecución
+---
 
-### Desarrollo
+## 🎨 Identidad Visual
+
+### Paleta de Colores
+- **Primary:** #1E3A5F (Azul profundo)
+- **Secondary:** #00BFA5 (Verde azulado)
+- **Accent:** #FF6B00 (Naranja)
+- **Success:** #4CAF50 (Verde)
+- **Danger:** #F44336 (Rojo)
+
+### Tipografía
+- **Títulos:** System Default (Bold)
+- **Contenido:** System Default (Regular)
+
+---
+
+## 🏆 Características Técnicas
+
+✅ Dashboard con estadísticas en tiempo real  
+✅ Gráficos interactivos (barras, radar, pie)  
+✅ Tabla de posiciones dinámica  
+✅ Vista detallada por equipo  
+✅ Comparativa de equipos  
+✅ API REST completa  
+✅ Carga automática de datos (seed)  
+✅ Manejo de errores  
+
+---
+
+## 🚀 Inicio Rápido
+
 ```bash
+# Instalar dependencias
+npm install
+
+# Crear archivo .env
+cp .env.example .env
+
+# Ejecutar en desarrollo
 npm run dev
-```
 
-### Producción local
-```bash
+# Ejecutar en producción
 npm start
 ```
 
-El servidor estará en `http://localhost:3000` (o puerto definido en `PORT`).
-
-## Carga automática de datos
-
-Al iniciar la app:
-- Se conecta a MongoDB.
-- Si no hay equipos en la colección, ejecuta seed automático con dataset realista de ligas europeas (mínimo 5 equipos por liga).
-
-También puedes forzar el seed manual:
+### Seed de datos
 ```bash
 npm run seed
 ```
 
-## API REST disponible
+---
 
-- `GET /api/leagues` → resumen de todas las ligas.
-- `GET /api/leagues/:league` → detalle por liga.
-- `GET /api/teams` → catálogo de equipos.
-- `GET /api/teams/:id` → detalle de equipo.
-- `GET /api/compare?ids=id1,id2,...` → comparativa de equipos.
+## 🌎 Información de Contacto - TST Solutions
 
-## Manejo de errores
+📍 **Quito - Ecuador**
 
-- Middleware de errores para API y vistas.
-- Página de error 404 y 500.
+📱 **WhatsApp:** +593 99 796 2747  
+💬 **Telegram:** @TST_Ecuador  
+📧 **Email:** negocios@tstsolutions.com.ec
 
-## Scripts npm
-
-- `npm start` → iniciar servidor.
-- `npm run dev` → iniciar con nodemon.
-- `npm run seed` → regenerar dataset.
+🌐 **Web:** https://tst-solutions.netlify.app/  
+📘 **Facebook:** https://www.facebook.com/tstsolutionsecuador/  
+🐦 **Twitter/X:** https://x.com/SolutionsT95698
 
 ---
 
 ## 📄 Licencia
 
-MIT — contribuciones bienvenidas 🚀
+© 2026 Estadísticas Fútbol by TST SOLUTIONS - Todos los derechos reservados.
 
 ---
 
-## 💻 Creado Por
+## 👨‍💻 Desarrollado por TST SOLUTIONS
 
-🧑‍💻 Isaac Haro
+*Technology that works. Solutions that scale.*
 
-Ingeniero en Sistemas · Full Stack · Automatización · Data
+---
 
-Isaac Esteban Haro Torres
-- 📧 zackharo1@gmail.com
-- 📱 098805517
-- 💻 [GitHub](https://github.com/ieharo1)
-
+<div align="center">
+  <p><strong>TST Solutions</strong> - Te Solucionamos Todo</p>
+</div>
